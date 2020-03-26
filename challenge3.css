@@ -1,0 +1,48 @@
+/*lettertypes*/
+@import url('https://fonts.googleapis.com/css?family=Saira+Semi+Condensed:400,700&display=swap');
+@font-face{
+	font-family: Anurati;
+	src:url('Anurati.otf');
+}
+
+/*geen padding en margin op alle elementen*/
+*{
+	padding:0;
+	margin:0;
+}
+
+body{
+	/*lettertype*/
+	font-family: 'Saira Semi Condensed',sans-serif;
+	/*Achtergrond*/
+	background-image: url("ag.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+}
+
+header{
+	padding:20px 0;
+	background-color: black;
+}
+
+/*titel in header*/
+h1{
+	font-family: Anurati, sans-serif;
+	/*hoofdletters*/
+	text-transform: uppercase;
+	/*letters verder uit elkaar*/
+	letter-spacing: 0.2em;
+	text-align: center;
+}
+
+/*tablet*/
+@media only screen and (min-width: 768px){
+	
+}
+
+/*groot scherm*/
+@media only screen and (min-width: 1440px){
+
+}
