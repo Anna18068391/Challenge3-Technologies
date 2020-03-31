@@ -19,12 +19,23 @@ body{
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	color: white;
 }
 
 header{
 	padding:20px 0;
+	color: white;
 	background-color: black;
+}
+
+/*Box met grafieken*/
+section{
+	margin: 20px;
+}
+
+article{
+	border-radius: 2em;
+	padding: 30px;
+	background-color: white;
 }
 
 /*titel in header*/
@@ -37,12 +48,59 @@ h1{
 	text-align: center;
 }
 
+img{
+	width: 100%;
+}
+
+.check{
+	background-color:#E6FFCC;
+}
+
 /*tablet*/
 @media only screen and (min-width: 768px){
-	
+	section{
+		display: grid;
+		grid-gap: 20px;
+		/*Gelijke kolommen*/
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas:
+	    'info base'
+	    'weer video';
+	    /*Articles niet het hele vak vullen*/
+	    align-items: start;	    
+	}
+
+	#info{
+		grid-area: info;
+	}
+	#base{
+		grid-area: base;
+	}
+	#weer{
+		grid-area: weer;
+	}
+	#video{
+		grid-area: video;
+	}
 }
 
-/*groot scherm*/
+/*laptop*/
+@media only screen and (min-width: 1024px){
+	section{
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-areas:
+	    'info info info'
+	    'base weer video';
+	}
+}
+
+/*Groot scherm*/
 @media only screen and (min-width: 1440px){
-
-}
+	section{
+		grid-template-columns: 2fr 1fr 1fr 1fr;
+		/*Grafieken naast elkaar*/
+		grid-template-areas:
+	    'info base weer video';
+	    /*Articles even groot*/
+		align-items: stretch;
+	}
