@@ -52,8 +52,22 @@ img{
 	width: 100%;
 }
 
+strong, span{
+	line-height: 1.8;
+}
+
+p{
+	margin-bottom: 20px;
+}
+
+#temperatuur, #wind, #zicht{
+	background-color:#ffcccc;
+	padding: 2px 8px;
+}
+
 .check{
-	background-color:#E6FFCC;
+	background-color:#E6FFCC !important;
+	padding: 2px 8px;
 }
 
 /*tablet*/

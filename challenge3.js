@@ -1,4 +1,5 @@
 // lat en long to string van function to global variabele zodat gebruik bij api
+// moet infoWeer() call herhaaldelijk voor if/else check?
 
 var latitude= '36.778259';
 var longitude= '-119.417931';
@@ -39,11 +40,20 @@ function infoWeer() {
 		if(temperatuur>=5 && temperatuur<=25){
 			document.getElementById('temperatuur').classList.add("check");
 		}
+		else{
+			document.getElementById('temperatuur').classList.remove("check");
+		}
 		if(wind<=3.3){
-			document.getElementById('wind').classList.add("check");
+			document.getElementById('wind').classList.add("check");	
+		}
+		else{
+			document.getElementById('wind').classList.remove("check");
 		}
 		if(zicht>=19000){
 			document.getElementById('zicht').classList.add("check");
+		}
+		else{
+			document.getElementById('zicht').classList.remove("check");
 		}
 	});
 }
