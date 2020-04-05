@@ -30,9 +30,6 @@ header{
 /*Box met grafieken*/
 section{
 	margin: 20px;
-}
-
-article{
 	border-radius: 2em;
 	padding: 30px;
 	background-color: white;
@@ -60,7 +57,7 @@ p{
 	margin-bottom: 20px;
 }
 
-#temperatuur, #wind, #zicht{
+#weer4 span, #weer1 span, #weerOCISLY span, #weerJRTI span{
 	background-color:#ffcccc;
 	padding: 2px 8px;
 }
