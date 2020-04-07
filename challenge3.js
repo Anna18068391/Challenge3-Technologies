@@ -49,6 +49,9 @@ function infoWeer4() {
 		else{
 			document.getElementById('wind4').classList.remove("check");
 		}
+		if(wind<=3.3){
+			document.getElementById('wind').classList.add("check");
+		}
 		if(zicht>=19000){
 			document.getElementById('zicht4').classList.add("check");
 		}
