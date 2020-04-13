@@ -1,5 +1,12 @@
 // lat en long to string van function to global variabele zodat gebruik bij api
 // moet infoWeer() call herhaaldelijk voor if/else check?
+// visibility weer bug zelfde resultaat?
+// life filmpje leuk of niet?
+// meldingen console
+// window onresize EN if screen is klein hoe?
+// google maps!
+// locatie lan en long in maps werkt?
+// style zie je even maar verdwijt dan maps???
 
 var latitude4= '36.778259';
 var longitude4= '-119.417931';
@@ -49,10 +56,7 @@ function infoWeer4() {
 		else{
 			document.getElementById('wind4').classList.remove("check");
 		}
-		if(wind<=3.3){
-			document.getElementById('wind').classList.add("check");
-		}
-		if(zicht>=19000){
+		if(zicht>=17000){
 			document.getElementById('zicht4').classList.add("check");
 		}
 		else{
@@ -109,13 +113,314 @@ function infoWeer1() {
 		else{
 			document.getElementById('wind1').classList.remove("check");
 		}
-		if(zicht>=19000){
+		if(zicht>=17000){
 			document.getElementById('zicht1').classList.add("check");
 		}
 		else{
 			document.getElementById('zicht1').classList.remove("check");
 		}
 	});
+}
+
+var kaart1;
+var kaartOCISLY;
+var kaartJRTI;
+
+function infoKaart() {
+	// set options for map 
+	var kaartStijl=[
+		  {
+		    "elementType": "geometry",
+		    "stylers": [
+		      {
+		        "color": "#1d2c4d"
+		      }
+		    ]
+		  },
+		  {
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      {
+		        "color": "#8ec3b9"
+		      }
+		    ]
+		  },
+		  {
+		    "elementType": "labels.text.stroke",
+		    "stylers": [
+		      {
+		        "color": "#1a3646"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "administrative.country",
+		    "elementType": "geometry.stroke",
+		    "stylers": [
+		      {
+		        "color": "#4b6878"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "administrative.land_parcel",
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      {
+		        "color": "#64779e"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "administrative.province",
+		    "elementType": "geometry.stroke",
+		    "stylers": [
+		      {
+		        "color": "#4b6878"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "landscape.man_made",
+		    "elementType": "geometry.stroke",
+		    "stylers": [
+		      {
+		        "color": "#334e87"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "landscape.natural",
+		    "elementType": "geometry",
+		    "stylers": [
+		      {
+		        "color": "#023e58"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "poi",
+		    "elementType": "geometry",
+		    "stylers": [
+		      {
+		        "color": "#283d6a"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "poi",
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      {
+		        "color": "#6f9ba5"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "poi",
+		    "elementType": "labels.text.stroke",
+		    "stylers": [
+		      {
+		        "color": "#1d2c4d"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "poi.business",
+		    "stylers": [
+		      {
+		        "visibility": "off"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "poi.park",
+		    "elementType": "geometry.fill",
+		    "stylers": [
+		      {
+		        "color": "#023e58"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "poi.park",
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      {
+		        "color": "#3C7680"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "road",
+		    "elementType": "geometry",
+		    "stylers": [
+		      {
+		        "color": "#304a7d"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "road",
+		    "elementType": "labels.icon",
+		    "stylers": [
+		      {
+		        "visibility": "off"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "road",
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      {
+		        "color": "#98a5be"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "road",
+		    "elementType": "labels.text.stroke",
+		    "stylers": [
+		      {
+		        "color": "#1d2c4d"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "road.highway",
+		    "elementType": "geometry",
+		    "stylers": [
+		      {
+		        "color": "#2c6675"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "road.highway",
+		    "elementType": "geometry.stroke",
+		    "stylers": [
+		      {
+		        "color": "#255763"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "road.highway",
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      {
+		        "color": "#b0d5ce"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "road.highway",
+		    "elementType": "labels.text.stroke",
+		    "stylers": [
+		      {
+		        "color": "#023e58"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "transit",
+		    "stylers": [
+		      {
+		        "visibility": "off"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "transit",
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      {
+		        "color": "#98a5be"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "transit",
+		    "elementType": "labels.text.stroke",
+		    "stylers": [
+		      {
+		        "color": "#1d2c4d"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "transit.line",
+		    "elementType": "geometry.fill",
+		    "stylers": [
+		      {
+		        "color": "#283d6a"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "transit.station",
+		    "elementType": "geometry",
+		    "stylers": [
+		      {
+		        "color": "#3a4762"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "water",
+		    "elementType": "geometry",
+		    "stylers": [
+		      {
+		        "color": "#0e1626"
+		      }
+		    ]
+		  },
+		  {
+		    "featureType": "water",
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      {
+		        "color": "#4e6d70"
+		      }
+		    ]
+		  }
+		];
+
+	var kaartOpties1 = {
+		center: {
+			lat: 28.4104, 
+			lng: -80.6188
+		},
+		zoom: 11,
+		styles:kaartStijl
+	};
+
+	// create map and add to page
+	kaart1 = new google.maps.Map(document.getElementById('kaart1'), kaartOpties1);
+
+	var kaartOptiesOCISLY = {
+		center: {
+			lat: 28.4104, 
+			lng: -80.6188
+		},
+		zoom: 11,
+		styles:kaartStijl
+	};
+
+	kaartOCISLY = new google.maps.Map(document.getElementById('kaartOCISLY'), kaartOptiesOCISLY);
+
+	var kaartOptiesJRTI = {
+		center: {
+			lat: 28.4104, 
+			lng: -80.6188
+		},
+		zoom: 11,
+		styles:kaartStijl
+	};
+
+	// create map and add to page
+	kaartJRTI = new google.maps.Map(document.getElementById('kaartJRTI'), kaartOptiesJRTI);
 }
 
 var latitudeOCISLY= '28.4104';
@@ -166,7 +471,7 @@ function infoWeerOCISLY() {
 		else{
 			document.getElementById('windOCISLY').classList.remove("check");
 		}
-		if(zicht>=19000){
+		if(zicht>=17000){
 			document.getElementById('zichtOCISLY').classList.add("check");
 		}
 		else{
@@ -223,7 +528,7 @@ function infoWeerJRTI() {
 		else{
 			document.getElementById('windJRTI').classList.remove("check");
 		}
-		if(zicht>=19000){
+		if(zicht>=17000){
 			document.getElementById('zichtJRTI').classList.add("check");
 		}
 		else{
@@ -232,7 +537,53 @@ function infoWeerJRTI() {
 	});
 }
 
+function toonTabbladen() {
+	var base4=document.getElementById('base4');
+	var base1=document.getElementById('base1');
+	var baseOCISLY=document.getElementById('baseOCISLY');
+	var baseJRTI=document.getElementById('baseJRTI');
+
+	base4.style.display = "grid";
+	base1.style.display = "none";
+	baseOCISLY.style.display = "none";
+	baseJRTI.style.display = "none";
+
+	document.getElementById('knop4').onclick=
+	function toonBase4(){
+		base4.style.display = "grid";
+		base1.style.display = "none";
+		baseOCISLY.style.display = "none";
+		baseJRTI.style.display = "none";
+	}
+
+	document.getElementById('knop1').onclick=
+	function toonBase4(){
+		base4.style.display = "none";
+		base1.style.display = "grid";
+		baseOCISLY.style.display = "none";
+		baseJRTI.style.display = "none";
+	}
+
+	document.getElementById('knopOCISLY').onclick=
+	function toonBase4(){
+		base4.style.display = "none";
+		base1.style.display = "none";
+		baseOCISLY.style.display = "grid";
+		baseJRTI.style.display = "none";
+	}
+
+	document.getElementById('knopJRTI').onclick=
+	function toonBase4(){
+		base4.style.display = "none";
+		base1.style.display = "none";
+		baseOCISLY.style.display = "none";
+		baseJRTI.style.display = "grid";
+	}
+}
+
 // alle functies activeren
+//window.onresize = 
+if (screen.width<1024 && screen.width>=768) {toonTabbladen();};
 infoLandingPad4();
 infoWeer4();
 infoLandingPad1();

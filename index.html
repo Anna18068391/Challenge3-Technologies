@@ -3,7 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<!--JavaSript-->
+		<!--JavaSript Google Maps API-->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARd_8M20Q0aT97xnlpWA57bnf32TdDzUI&callback=infoKaart"
+	    async defer></script>
+	    <!--JavaSript-->
 		<script src="challenge3.js" defer></script>
 		<!--CSS-->
 		<link rel="stylesheet" type="text/css" href="challenge3.css"/>
@@ -15,9 +18,15 @@
 	<body>
 		<header>
 			<h1>SpaceX</h1>
+			<nav>
+				<button id="knop4">Vandenberg Air Force Base</button>
+				<button id="knop1">Landing Zone 1</button>
+				<button id="knopOCISLY">Of Course I Still Love You</button>
+				<button id="knopJRTI">Just Read the Instructions</button>
+			</nav>
 		</header>
-		<section>
-			<article id="base4">		
+		<section id="base4">
+			<article id="info4">		
 				<h2>Info base</h2>
 				<p id="naam4"></p>
 				<strong>locatie: </strong><span id="regio4"></span><br />
@@ -37,13 +46,13 @@
 				<img src="https://www.ndbc.noaa.gov/buoycam.php?station=46054"/>
 			</article>
 		</section>
-		<section>
-			<article id="base1">		
+		<section id="base1">
+			<article id="info1">		
 				<h2>Info base</h2>
 				<p id="naam1"></p>
 				<strong>locatie: </strong><span id="regio1"></span><br />
-				<strong>Details: </strong><p>...</p>
-				<img src="base1.jpg" alt="...">
+				<strong>Details: </strong><p>Landing Zone 1 is de eerste landings base van SpaceX. Op deze base heeft de eerste landing van de Falcon 9 plaatsgevonden.</p>
+				<img src="base1.jpg" alt="Landing Zone 1">
 			</article>
 			<article id="weer1">
 				<h2>Weer base</h2>
@@ -52,14 +61,18 @@
 				<strong>Windsnelheid: </strong><span id="wind1"></span><br />
 				<strong>Helderheid: </strong><span id="zicht1"></span>
 			</article>
+			<article id="locatie1">
+				<h2>Locatie</h2>
+				<div id="kaart1"></div>
+			</article>
 		</section>
-		<section>
-			<article id="baseOCISLY">
+		<section id="baseOCISLY">
+			<article id="infoOCISLY">
 				<h2>Info base</h2>
 				<p id="naamOCISLY"></p>
 				<strong>locatie: </strong><span id="regioOCISLY"></span><br />
-				<strong>Details: </strong><p>...</p>
-				<img src="baseOCISLY.jpg" alt="...">
+				<strong>Details: </strong><p>Of Course I Still Love You is een landings schip. Het schip is in Louisiana in 2015 gebouwd. Het is een nieuwere versie van het landings schip Just Read the Instructions.</p>
+				<img src="https://i.imgur.com/28dCx6G.jpg" alt="Of Course I Still Love landings schip">
 			</article>
 			<article id="weerOCISLY">
 				<h2>Weer base</h2>
@@ -68,14 +81,18 @@
 				<strong>Windsnelheid: </strong><span id="windOCISLY"></span><br />
 				<strong>Helderheid: </strong><span id="zichtOCISLY"></span>
 			</article>
+			<article id="locatieOCISLY">
+				<h2>Locatie</h2>
+				<div id="kaartOCISLY"></div>
+			</article>
 		</section>
-		<section>
-			<article id="baseJRTI">
+		<section id="baseJRTI">
+			<article id="infoJRTI">
 				<h2>Info base</h2>
 				<p id="naamJRTI"></p>
 				<strong>locatie: </strong><span id="regioJRTI"></span><br />
-				<strong>Details: </strong><p>...</p>
-				<img src="baseJRTI.jpg" alt="...">
+				<strong>Details: </strong><p>Just Read the Instructions is een landings schip. Zijn eerste missie was het ophalen van de eerste trap van de Falcon 9. De landing van de Falcon 9 Flight 29 is geslaagd op dit schip.</p>
+				<img src="https://i.imgur.com/RJPmP8G.jpg" alt="Just Read the Instructions landings schip">
 			</article>
 			<article id="weerJRTI">
 				<h2>Weer base</h2>
@@ -83,6 +100,10 @@
 				<strong>Temperatuur: </strong><span id="temperatuurJRTI"></span><br />
 				<strong>Windsnelheid: </strong><span id="windJRTI"></span><br />
 				<strong>Helderheid: </strong><span id="zichtJRTI"></span>
+			</article>
+			<article id="locatieJRTI">
+				<h2>Locatie</h2>
+				<div id="kaartJRTI"></div>
 			</article>
 		</section>
 	</body>
