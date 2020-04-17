@@ -1,13 +1,3 @@
-// lat en long to string van function to global variabele zodat gebruik bij api
-// moet infoWeer() call herhaaldelijk voor if/else check?
-// visibility weer bug zelfde resultaat?
-// life filmpje leuk of niet?
-// meldingen console
-// window onresize EN if screen is klein hoe?
-// google maps!
-// locatie lan en long in maps werkt?
-// style zie je even maar verdwijt dan maps???
-
 var latitude4= '36.778259';
 var longitude4= '-119.417931';
 
@@ -43,7 +33,7 @@ function infoWeer4() {
 		var zicht=data.visibility;
 		document.getElementById('temperatuur4').innerHTML = temperatuur+'&#176;C';
 		document.getElementById('wind4').innerHTML = wind+' meter/sec';
-		document.getElementById('zicht4').innerHTML = zicht+'m ver zicht';
+		document.getElementById('zicht4').innerHTML = Math.round(zicht/1000)+'km ver zicht';
 		if(temperatuur>=5 && temperatuur<=25){
 			document.getElementById('temperatuur4').classList.add("check");
 		}
@@ -56,8 +46,9 @@ function infoWeer4() {
 		else{
 			document.getElementById('wind4').classList.remove("check");
 		}
-		if(zicht>=17000){
+		if(zicht>=16093){
 			document.getElementById('zicht4').classList.add("check");
+			document.getElementById('zicht4').innerHTML = 'Maximaal zicht';
 		}
 		else{
 			document.getElementById('zicht4').classList.remove("check");
@@ -100,7 +91,7 @@ function infoWeer1() {
 		var zicht=data.visibility;
 		document.getElementById('temperatuur1').innerHTML = temperatuur+'&#176;C';
 		document.getElementById('wind1').innerHTML = wind+' meter/sec';
-		document.getElementById('zicht1').innerHTML = zicht+'m ver zicht';
+		document.getElementById('zicht1').innerHTML = Math.round(zicht/1000)+'km ver zicht';
 		if(temperatuur>=5 && temperatuur<=25){
 			document.getElementById('temperatuur1').classList.add("check");
 		}
@@ -113,8 +104,9 @@ function infoWeer1() {
 		else{
 			document.getElementById('wind1').classList.remove("check");
 		}
-		if(zicht>=17000){
+		if(zicht>=16093){
 			document.getElementById('zicht1').classList.add("check");
+			document.getElementById('zicht1').innerHTML = 'Maximaal zicht';
 		}
 		else{
 			document.getElementById('zicht1').classList.remove("check");
@@ -458,7 +450,7 @@ function infoWeerOCISLY() {
 		var zicht=data.visibility;
 		document.getElementById('temperatuurOCISLY').innerHTML = temperatuur+'&#176;C';
 		document.getElementById('windOCISLY').innerHTML = wind+' meter/sec';
-		document.getElementById('zichtOCISLY').innerHTML = zicht+'m ver zicht';
+		document.getElementById('zichtOCISLY').innerHTML = Math.round(zicht/1000)+'km ver zicht';
 		if(temperatuur>=5 && temperatuur<=25){
 			document.getElementById('temperatuurOCISLY').classList.add("check");
 		}
@@ -471,8 +463,9 @@ function infoWeerOCISLY() {
 		else{
 			document.getElementById('windOCISLY').classList.remove("check");
 		}
-		if(zicht>=17000){
+		if(zicht>=16093){
 			document.getElementById('zichtOCISLY').classList.add("check");
+			document.getElementById('zichtOCISLY').innerHTML = 'Maximaal zicht';
 		}
 		else{
 			document.getElementById('zichtOCISLY').classList.remove("check");
@@ -515,7 +508,7 @@ function infoWeerJRTI() {
 		var zicht=data.visibility;
 		document.getElementById('temperatuurJRTI').innerHTML = temperatuur+'&#176;C';
 		document.getElementById('windJRTI').innerHTML = wind+' meter/sec';
-		document.getElementById('zichtJRTI').innerHTML = zicht+'m ver zicht';
+		document.getElementById('zichtJRTI').innerHTML = Math.round(zicht/1000)+'km ver zicht';
 		if(temperatuur>=5 && temperatuur<=25){
 			document.getElementById('temperatuurJRTI').classList.add("check");
 		}
@@ -528,8 +521,9 @@ function infoWeerJRTI() {
 		else{
 			document.getElementById('windJRTI').classList.remove("check");
 		}
-		if(zicht>=17000){
+		if(zicht>=16093){
 			document.getElementById('zichtJRTI').classList.add("check");
+			document.getElementById('zichtJRTI').innerHTML = 'Maximaal zicht';
 		}
 		else{
 			document.getElementById('zichtJRTI').classList.remove("check");
@@ -539,51 +533,97 @@ function infoWeerJRTI() {
 
 function toonTabbladen() {
 	var base4=document.getElementById('base4');
-	var base1=document.getElementById('base1');
-	var baseOCISLY=document.getElementById('baseOCISLY');
-	var baseJRTI=document.getElementById('baseJRTI');
+		var base1=document.getElementById('base1');
+		var baseOCISLY=document.getElementById('baseOCISLY');
+		var baseJRTI=document.getElementById('baseJRTI');
 
-	base4.style.display = "grid";
-	base1.style.display = "none";
-	baseOCISLY.style.display = "none";
-	baseJRTI.style.display = "none";
+	if (screen.width<768) {
+		base4.style.display = "block";
+		base1.style.display = "none";
+		baseOCISLY.style.display = "none";
+		baseJRTI.style.display = "none";
 
-	document.getElementById('knop4').onclick=
-	function toonBase4(){
+		document.getElementById('knop4').onclick=
+		function toonBase4(){
+			base4.style.display = "block";
+			base1.style.display = "none";
+			baseOCISLY.style.display = "none";
+			baseJRTI.style.display = "none";
+		}
+
+		document.getElementById('knop1').onclick=
+		function toonBase4(){
+			base4.style.display = "none";
+			base1.style.display = "block";
+			baseOCISLY.style.display = "none";
+			baseJRTI.style.display = "none";
+		}
+
+		document.getElementById('knopOCISLY').onclick=
+		function toonBase4(){
+			base4.style.display = "none";
+			base1.style.display = "none";
+			baseOCISLY.style.display = "block";
+			baseJRTI.style.display = "none";
+		}
+
+		document.getElementById('knopJRTI').onclick=
+		function toonBase4(){
+			base4.style.display = "none";
+			base1.style.display = "none";
+			baseOCISLY.style.display = "none";
+			baseJRTI.style.display = "block";
+		}
+	}
+	else if (screen.width<1024 && screen.width>=768) {
 		base4.style.display = "grid";
 		base1.style.display = "none";
 		baseOCISLY.style.display = "none";
 		baseJRTI.style.display = "none";
-	}
 
-	document.getElementById('knop1').onclick=
-	function toonBase4(){
-		base4.style.display = "none";
-		base1.style.display = "grid";
-		baseOCISLY.style.display = "none";
-		baseJRTI.style.display = "none";
-	}
+		document.getElementById('knop4').onclick=
+		function toonBase4(){
+			base4.style.display = "grid";
+			base1.style.display = "none";
+			baseOCISLY.style.display = "none";
+			baseJRTI.style.display = "none";
+		}
 
-	document.getElementById('knopOCISLY').onclick=
-	function toonBase4(){
-		base4.style.display = "none";
-		base1.style.display = "none";
-		baseOCISLY.style.display = "grid";
-		baseJRTI.style.display = "none";
-	}
+		document.getElementById('knop1').onclick=
+		function toonBase4(){
+			base4.style.display = "none";
+			base1.style.display = "grid";
+			baseOCISLY.style.display = "none";
+			baseJRTI.style.display = "none";
+		}
 
-	document.getElementById('knopJRTI').onclick=
-	function toonBase4(){
-		base4.style.display = "none";
-		base1.style.display = "none";
-		baseOCISLY.style.display = "none";
-		baseJRTI.style.display = "grid";
+		document.getElementById('knopOCISLY').onclick=
+		function toonBase4(){
+			base4.style.display = "none";
+			base1.style.display = "none";
+			baseOCISLY.style.display = "grid";
+			baseJRTI.style.display = "none";
+		}
+
+		document.getElementById('knopJRTI').onclick=
+		function toonBase4(){
+			base4.style.display = "none";
+			base1.style.display = "none";
+			baseOCISLY.style.display = "none";
+			baseJRTI.style.display = "grid";
+		}
+	}
+	else {
+		base4.style.display = null;
+		base1.style.display = null;
+		baseOCISLY.style.display = null;
+		baseJRTI.style.display = null;
 	}
 }
 
 // alle functies activeren
-//window.onresize = 
-if (screen.width<1024 && screen.width>=768) {toonTabbladen();};
+toonTabbladen();
+window.onresize = toonTabbladen;
 infoLandingPad4();
 infoWeer4();
 infoLandingPad1();
