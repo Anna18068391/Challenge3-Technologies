@@ -1,6 +1,3 @@
-var latitude4= '36.778259';
-var longitude4= '-119.417931';
-
 function infoLandingPad4(){
 	var API='https://api.spacexdata.com/v3/landpads/LZ-4';
 	fetch(API)
@@ -14,15 +11,16 @@ function infoLandingPad4(){
 		document.getElementById('naam4').innerHTML = naam;
 		document.getElementById('regio4').innerHTML = regio;
 		//locatie
-		latitude4 = data.location.latitude;
-		longitude4 = data.location.longitude;
+		var latitude4 = data.location.latitude;
+		var longitude4 = data.location.longitude;
+		infoWeer4(latitude4, longitude4);
 	});
 }
 
-function infoWeer4() {
+function infoWeer4(inhoudlat4, inhoudlon4) {
 	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
 	var apiKey ='71651970a1f747f6f025a4c39785894b';
-	var API = url + latitude4 +'&lon='+ longitude4 + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
+	var API = url + inhoudlat4 +'&lon='+ inhoudlon4 + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
 	fetch(API)
 	.then(function(data) {
 		return data.json();
@@ -56,9 +54,6 @@ function infoWeer4() {
 	});
 }
 
-var latitude1= '28.485833';
-var longitude1= '-80.544444';
-
 function infoLandingPad1(){
 	var API='https://api.spacexdata.com/v3/landpads/LZ-1';
 	fetch(API)
@@ -74,13 +69,14 @@ function infoLandingPad1(){
 		//locatie
 		latitude1 = data.location.latitude;
 		longitude1 = data.location.longitude;
+		infoWeer1(latitude1, longitude1);
 	});
 }
 
-function infoWeer1() {
+function infoWeer1(inhoudlat1, inhoudlon1) {
 	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
 	var apiKey ='71651970a1f747f6f025a4c39785894b';
-	var API = url + latitude1 +'&lon='+ longitude1 + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
+	var API = url + inhoudlat1 +'&lon='+ inhoudlon1 + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
 	fetch(API)
 	.then(function(data) {
 		return data.json();
@@ -415,9 +411,6 @@ function infoKaart() {
 	kaartJRTI = new google.maps.Map(document.getElementById('kaartJRTI'), kaartOptiesJRTI);
 }
 
-var latitudeOCISLY= '28.4104';
-var longitudeOCISLY= '-80.6188';
-
 function infoLandingPadOCISLY(){
 	var API='https://api.spacexdata.com/v3/landpads/OCISLY';
 	fetch(API)
@@ -433,13 +426,14 @@ function infoLandingPadOCISLY(){
 		//locatie
 		latitudeOCISLY = data.location.latitude;
 		longitudeOCISLY = data.location.longitude;
+		infoWeerOCISLY(latitudeOCISLY, longitudeOCISLY);
 	});
 }
 
-function infoWeerOCISLY() {
+function infoWeerOCISLY(inhoudlatOCISLY, inhoudlonOCISLY) {
 	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
 	var apiKey ='71651970a1f747f6f025a4c39785894b';
-	var API = url + latitudeOCISLY +'&lon='+ longitudeOCISLY + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
+	var API = url + inhoudlatOCISLY +'&lon='+ inhoudlonOCISLY + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
 	fetch(API)
 	.then(function(data) {
 		return data.json();
@@ -473,9 +467,6 @@ function infoWeerOCISLY() {
 	});
 }
 
-var latitudeJRTI= '33.7291858';
-var longitudeJRTI= '-118.262015';
-
 function infoLandingPadJRTI(){
 	var API='https://api.spacexdata.com/v3/landpads/JRTI';
 	fetch(API)
@@ -491,13 +482,14 @@ function infoLandingPadJRTI(){
 		//locatie
 		latitudeJRTI = data.location.latitude;
 		longitudeJRTI = data.location.longitude;
+		infoWeerJRTI(latitudeJRTI, longitudeJRTI);
 	});
 }
 
-function infoWeerJRTI() {
+function infoWeerJRTI(inhoudlatJRTI, inhoudlonJRTI) {
 	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
 	var apiKey ='71651970a1f747f6f025a4c39785894b';
-	var API = url + latitudeJRTI +'&lon='+ longitudeJRTI + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
+	var API = url + inhoudlatJRTI +'&lon='+ inhoudlonJRTI + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
 	fetch(API)
 	.then(function(data) {
 		return data.json();
@@ -625,10 +617,6 @@ function toonTabbladen() {
 toonTabbladen();
 window.onresize = toonTabbladen;
 infoLandingPad4();
-infoWeer4();
 infoLandingPad1();
-infoWeer1();
 infoLandingPadOCISLY();
-infoWeerOCISLY();
 infoLandingPadJRTI();
-infoWeerJRTI();
