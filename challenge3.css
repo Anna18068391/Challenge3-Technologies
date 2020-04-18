@@ -27,7 +27,19 @@ header{
 	background-color: black;
 }
 
+/*titel in header*/
+h1{
+	font-family: Anurati, sans-serif;
+	/*hoofdletters*/
+	text-transform: uppercase;
+	/*letters verder uit elkaar*/
+	letter-spacing: 0.2em;
+	text-align: center;
+}
+
+/*knoppen*/
 nav{
+	/*responsive*/
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
@@ -49,21 +61,12 @@ button:hover{
 	background-color: transparent;
 }
 
+/*elke base is een section*/
 section{
 	margin: 20px;
 	border-radius: 2em;
 	padding: 30px;
 	background-color: white;
-}
-
-/*titel in header*/
-h1{
-	font-family: Anurati, sans-serif;
-	/*hoofdletters*/
-	text-transform: uppercase;
-	/*letters verder uit elkaar*/
-	letter-spacing: 0.2em;
-	text-align: center;
 }
 
 img{
@@ -117,7 +120,7 @@ p{
 		grid-gap: 20px;
 		grid-template-areas:
 		'info4 weer4'
-	    'info4 video';
+	    'info4 locatie4';
 	}
 
 	#base1{
@@ -155,8 +158,8 @@ p{
 		grid-area: weer4;
 	}
 
-	#video{
-		grid-area: video;
+	#locatie4{
+		grid-area: locatie4;
 	}
 
 	#info1{
@@ -202,12 +205,17 @@ p{
 		display: none;
 	}
 
+	#kaart1, #kaartOCISLY, #kaartJRTI{
+		width: 100%;
+		height: 412px;
+	}
+
 	#base4{
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-gap: 20px;
 		grid-template-areas:
-		'info4 weer4 video';
+		'info4 weer4 locatie4';
 	}
 
 	#base1{
@@ -270,7 +278,7 @@ p{
 	}
 
 
-	#weer4 h2, #weer1 h2, #weerOCISLY h2, #weerJRTI h2, #video h2, #locatie1 h2, #locatieOCISLY h2, #locatieJRTI h2{
+	#weer4 h2, #weer1 h2, #weerOCISLY h2, #weerJRTI h2, #locatie4 h2, #locatie1 h2, #locatieOCISLY h2, #locatieJRTI h2{
 		margin-top: 20px;
 	}
 }

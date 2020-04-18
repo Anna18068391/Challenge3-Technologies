@@ -31,7 +31,7 @@ function infoWeer4(inhoudlat4, inhoudlon4) {
 		var zicht=data.visibility;
 		document.getElementById('temperatuur4').innerHTML = temperatuur+'&#176;C';
 		document.getElementById('wind4').innerHTML = wind+' meter/sec';
-		document.getElementById('zicht4').innerHTML = Math.round(zicht/1000)+'km ver zicht';
+		document.getElementById('zicht4').innerHTML = Math.round(zicht/1000)+' km ver zicht';
 		if(temperatuur>=5 && temperatuur<=25){
 			document.getElementById('temperatuur4').classList.add("check");
 		}
@@ -87,7 +87,7 @@ function infoWeer1(inhoudlat1, inhoudlon1) {
 		var zicht=data.visibility;
 		document.getElementById('temperatuur1').innerHTML = temperatuur+'&#176;C';
 		document.getElementById('wind1').innerHTML = wind+' meter/sec';
-		document.getElementById('zicht1').innerHTML = Math.round(zicht/1000)+'km ver zicht';
+		document.getElementById('zicht1').innerHTML = Math.round(zicht/1000)+' km ver zicht';
 		if(temperatuur>=5 && temperatuur<=25){
 			document.getElementById('temperatuur1').classList.add("check");
 		}
@@ -110,7 +110,118 @@ function infoWeer1(inhoudlat1, inhoudlon1) {
 	});
 }
 
-var kaart1;
+function infoLandingPadOCISLY(){
+	var API='https://api.spacexdata.com/v3/landpads/OCISLY';
+	fetch(API)
+	.then(function(data) {
+		return data.json();
+	})
+	.then(function(data) {
+		//info
+		var naam =data.full_name;
+		var regio=data.location.region+" - "+data.location.name;
+		document.getElementById('naamOCISLY').innerHTML = naam;
+		document.getElementById('regioOCISLY').innerHTML = regio;
+		//locatie
+		latitudeOCISLY = data.location.latitude;
+		longitudeOCISLY = data.location.longitude;
+		infoWeerOCISLY(latitudeOCISLY, longitudeOCISLY);
+	});
+}
+
+function infoWeerOCISLY(inhoudlatOCISLY, inhoudlonOCISLY) {
+	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
+	var apiKey ='71651970a1f747f6f025a4c39785894b';
+	var API = url + inhoudlatOCISLY +'&lon='+ inhoudlonOCISLY + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
+	fetch(API)
+	.then(function(data) {
+		return data.json();
+	})
+	.then(function(data) {
+		var temperatuur=Math.round(data.main.temp);
+		var wind=data.wind.speed;
+		var zicht=data.visibility;
+		document.getElementById('temperatuurOCISLY').innerHTML = temperatuur+'&#176;C';
+		document.getElementById('windOCISLY').innerHTML = wind+' meter/sec';
+		document.getElementById('zichtOCISLY').innerHTML = Math.round(zicht/1000)+' km ver zicht';
+		if(temperatuur>=5 && temperatuur<=25){
+			document.getElementById('temperatuurOCISLY').classList.add("check");
+		}
+		else{
+			document.getElementById('temperatuurOCISLY').classList.remove("check");
+		}
+		if(wind<=3.3){
+			document.getElementById('windOCISLY').classList.add("check");	
+		}
+		else{
+			document.getElementById('windOCISLY').classList.remove("check");
+		}
+		if(zicht>=16093){
+			document.getElementById('zichtOCISLY').classList.add("check");
+			document.getElementById('zichtOCISLY').innerHTML = 'Maximaal zicht';
+		}
+		else{
+			document.getElementById('zichtOCISLY').classList.remove("check");
+		}
+	});
+}
+
+function infoLandingPadJRTI(){
+	var API='https://api.spacexdata.com/v3/landpads/JRTI';
+	fetch(API)
+	.then(function(data) {
+		return data.json();
+	})
+	.then(function(data) {
+		//info
+		var naam =data.full_name;
+		var regio=data.location.region+" - "+data.location.name;
+		document.getElementById('naamJRTI').innerHTML = naam;
+		document.getElementById('regioJRTI').innerHTML = regio;
+		//locatie
+		latitudeJRTI = data.location.latitude;
+		longitudeJRTI = data.location.longitude;
+		infoWeerJRTI(latitudeJRTI, longitudeJRTI);
+	});
+}
+
+function infoWeerJRTI(inhoudlatJRTI, inhoudlonJRTI) {
+	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
+	var apiKey ='71651970a1f747f6f025a4c39785894b';
+	var API = url + inhoudlatJRTI +'&lon='+ inhoudlonJRTI + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
+	fetch(API)
+	.then(function(data) {
+		return data.json();
+	})
+	.then(function(data) {
+		var temperatuur=Math.round(data.main.temp);
+		var wind=data.wind.speed;
+		var zicht=data.visibility;
+		document.getElementById('temperatuurJRTI').innerHTML = temperatuur+'&#176;C';
+		document.getElementById('windJRTI').innerHTML = wind+' meter/sec';
+		document.getElementById('zichtJRTI').innerHTML = Math.round(zicht/1000)+' km ver zicht';
+		if(temperatuur>=5 && temperatuur<=25){
+			document.getElementById('temperatuurJRTI').classList.add("check");
+		}
+		else{
+			document.getElementById('temperatuurJRTI').classList.remove("check");
+		}
+		if(wind<=3.3){
+			document.getElementById('windJRTI').classList.add("check");	
+		}
+		else{
+			document.getElementById('windJRTI').classList.remove("check");
+		}
+		if(zicht>=16093){
+			document.getElementById('zichtJRTI').classList.add("check");
+			document.getElementById('zichtJRTI').innerHTML = 'Maximaal zicht';
+		}
+		else{
+			document.getElementById('zichtJRTI').classList.remove("check");
+		}
+	});
+}
+
 var kaartOCISLY;
 var kaartJRTI;
 
@@ -375,18 +486,6 @@ function infoKaart() {
 		  }
 		];
 
-	var kaartOpties1 = {
-		center: {
-			lat: 28.4104, 
-			lng: -80.6188
-		},
-		zoom: 11,
-		styles:kaartStijl
-	};
-
-	// create map and add to page
-	kaart1 = new google.maps.Map(document.getElementById('kaart1'), kaartOpties1);
-
 	var kaartOptiesOCISLY = {
 		center: {
 			lat: 28.4104, 
@@ -411,131 +510,17 @@ function infoKaart() {
 	kaartJRTI = new google.maps.Map(document.getElementById('kaartJRTI'), kaartOptiesJRTI);
 }
 
-function infoLandingPadOCISLY(){
-	var API='https://api.spacexdata.com/v3/landpads/OCISLY';
-	fetch(API)
-	.then(function(data) {
-		return data.json();
-	})
-	.then(function(data) {
-		//info
-		var naam =data.full_name;
-		var regio=data.location.region+" - "+data.location.name;
-		document.getElementById('naamOCISLY').innerHTML = naam;
-		document.getElementById('regioOCISLY').innerHTML = regio;
-		//locatie
-		latitudeOCISLY = data.location.latitude;
-		longitudeOCISLY = data.location.longitude;
-		infoWeerOCISLY(latitudeOCISLY, longitudeOCISLY);
-	});
-}
-
-function infoWeerOCISLY(inhoudlatOCISLY, inhoudlonOCISLY) {
-	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
-	var apiKey ='71651970a1f747f6f025a4c39785894b';
-	var API = url + inhoudlatOCISLY +'&lon='+ inhoudlonOCISLY + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
-	fetch(API)
-	.then(function(data) {
-		return data.json();
-	})
-	.then(function(data) {
-		var temperatuur=Math.round(data.main.temp);
-		var wind=data.wind.speed;
-		var zicht=data.visibility;
-		document.getElementById('temperatuurOCISLY').innerHTML = temperatuur+'&#176;C';
-		document.getElementById('windOCISLY').innerHTML = wind+' meter/sec';
-		document.getElementById('zichtOCISLY').innerHTML = Math.round(zicht/1000)+'km ver zicht';
-		if(temperatuur>=5 && temperatuur<=25){
-			document.getElementById('temperatuurOCISLY').classList.add("check");
-		}
-		else{
-			document.getElementById('temperatuurOCISLY').classList.remove("check");
-		}
-		if(wind<=3.3){
-			document.getElementById('windOCISLY').classList.add("check");	
-		}
-		else{
-			document.getElementById('windOCISLY').classList.remove("check");
-		}
-		if(zicht>=16093){
-			document.getElementById('zichtOCISLY').classList.add("check");
-			document.getElementById('zichtOCISLY').innerHTML = 'Maximaal zicht';
-		}
-		else{
-			document.getElementById('zichtOCISLY').classList.remove("check");
-		}
-	});
-}
-
-function infoLandingPadJRTI(){
-	var API='https://api.spacexdata.com/v3/landpads/JRTI';
-	fetch(API)
-	.then(function(data) {
-		return data.json();
-	})
-	.then(function(data) {
-		//info
-		var naam =data.full_name;
-		var regio=data.location.region+" - "+data.location.name;
-		document.getElementById('naamJRTI').innerHTML = naam;
-		document.getElementById('regioJRTI').innerHTML = regio;
-		//locatie
-		latitudeJRTI = data.location.latitude;
-		longitudeJRTI = data.location.longitude;
-		infoWeerJRTI(latitudeJRTI, longitudeJRTI);
-	});
-}
-
-function infoWeerJRTI(inhoudlatJRTI, inhoudlonJRTI) {
-	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
-	var apiKey ='71651970a1f747f6f025a4c39785894b';
-	var API = url + inhoudlatJRTI +'&lon='+ inhoudlonJRTI + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
-	fetch(API)
-	.then(function(data) {
-		return data.json();
-	})
-	.then(function(data) {
-		var temperatuur=Math.round(data.main.temp);
-		var wind=data.wind.speed;
-		var zicht=data.visibility;
-		document.getElementById('temperatuurJRTI').innerHTML = temperatuur+'&#176;C';
-		document.getElementById('windJRTI').innerHTML = wind+' meter/sec';
-		document.getElementById('zichtJRTI').innerHTML = Math.round(zicht/1000)+'km ver zicht';
-		if(temperatuur>=5 && temperatuur<=25){
-			document.getElementById('temperatuurJRTI').classList.add("check");
-		}
-		else{
-			document.getElementById('temperatuurJRTI').classList.remove("check");
-		}
-		if(wind<=3.3){
-			document.getElementById('windJRTI').classList.add("check");	
-		}
-		else{
-			document.getElementById('windJRTI').classList.remove("check");
-		}
-		if(zicht>=16093){
-			document.getElementById('zichtJRTI').classList.add("check");
-			document.getElementById('zichtJRTI').innerHTML = 'Maximaal zicht';
-		}
-		else{
-			document.getElementById('zichtJRTI').classList.remove("check");
-		}
-	});
-}
-
 function toonTabbladen() {
 	var base4=document.getElementById('base4');
 	var base1=document.getElementById('base1');
 	var baseOCISLY=document.getElementById('baseOCISLY');
 	var baseJRTI=document.getElementById('baseJRTI');
 
-	base4.style.display = "block";
+	if (window.innerWidth<768) {
+		base4.style.display = "block";
 		base1.style.display = "none";
 		baseOCISLY.style.display = "none";
 		baseJRTI.style.display = "none";
-	
-	if (screen.width<768) {
-		
 
 		document.getElementById('knop4').onclick=
 		function toonBase4(){
@@ -570,7 +555,7 @@ function toonTabbladen() {
 		}
 	}
 	
-	else if (screen.width<1024 && screen.width>=768) {
+	else if (window.innerWidth<1024 && screen.width>=768) {
 		base4.style.display = "grid";
 		base1.style.display = "none";
 		baseOCISLY.style.display = "none";
@@ -617,9 +602,9 @@ function toonTabbladen() {
 }
 
 // alle functies activeren
-toonTabbladen();
-window.onresize = toonTabbladen;
 infoLandingPad4();
 infoLandingPad1();
 infoLandingPadOCISLY();
 infoLandingPadJRTI();
+toonTabbladen();
+window.onresize = toonTabbladen;
