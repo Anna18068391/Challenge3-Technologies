@@ -35,13 +35,18 @@ nav{
 
 button{
 	margin-top:20px;
-    border: none;
+    border: solid thick white;
     padding: 5px 10px;
     color: black;
     background-color: white;
     border-radius: 2em;
     font-family: 'Saira Semi Condensed',sans-serif;
     width:100%;
+}
+
+button:hover{
+	color: white;
+	background-color: transparent;
 }
 
 section{
@@ -98,7 +103,7 @@ p{
 	}
 }
 
-@media only screen and (min-width: 640px){
+@media only screen and (min-width: 680px){
 	button{
 		width:auto;
 	}

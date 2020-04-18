@@ -525,15 +525,17 @@ function infoWeerJRTI(inhoudlatJRTI, inhoudlonJRTI) {
 
 function toonTabbladen() {
 	var base4=document.getElementById('base4');
-		var base1=document.getElementById('base1');
-		var baseOCISLY=document.getElementById('baseOCISLY');
-		var baseJRTI=document.getElementById('baseJRTI');
+	var base1=document.getElementById('base1');
+	var baseOCISLY=document.getElementById('baseOCISLY');
+	var baseJRTI=document.getElementById('baseJRTI');
 
-	if (screen.width<768) {
-		base4.style.display = "block";
+	base4.style.display = "block";
 		base1.style.display = "none";
 		baseOCISLY.style.display = "none";
 		baseJRTI.style.display = "none";
+	
+	if (screen.width<768) {
+		
 
 		document.getElementById('knop4').onclick=
 		function toonBase4(){
@@ -567,6 +569,7 @@ function toonTabbladen() {
 			baseJRTI.style.display = "block";
 		}
 	}
+	
 	else if (screen.width<1024 && screen.width>=768) {
 		base4.style.display = "grid";
 		base1.style.display = "none";
