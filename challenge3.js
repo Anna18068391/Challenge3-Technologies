@@ -1,3 +1,27 @@
+mapboxgl.accessToken = 'pk.eyJ1IjoiMTgwNjgzOTEiLCJhIjoiY2s5NzdndWZxMDl4YzNmbWdkYmtxY3BndyJ9.dJL2YabEA7cPVAzBlyX2Vw';
+
+function laadMapOCISLY(locOCISLY) {
+	var mapOCISLY = new mapboxgl.Map({
+	  container: 'kaartOCISLY',
+	  style: 'mapbox://styles/18068391/ck97ev0et2h6a1io76tah1fzv',
+	  center: locOCISLY,
+	  zoom: 10,
+	});
+	var marker = new mapboxgl.Marker().setLngLat(locOCISLY).addTo(mapOCISLY);
+	mapOCISLY.addControl(new mapboxgl.NavigationControl()); 
+}
+function laadMapJRTI(locJRTI) {
+	var mapJRTI = new mapboxgl.Map({
+	  container: 'kaartJRTI',
+	  style: 'mapbox://styles/18068391/ck97ev0et2h6a1io76tah1fzv',
+	  center: locJRTI,
+	  zoom: 10,
+	});
+	var marker = new mapboxgl.Marker().setLngLat(locJRTI).addTo(mapJRTI);
+	mapJRTI.addControl(new mapboxgl.NavigationControl());
+}
+
+
 function toonTijdFlorida() {
 	var date = new Date();
 	var uren = date.getUTCHours()-4;
@@ -17,8 +41,6 @@ function toonTijdFlorida() {
 	document.getElementById('tijdflorida').innerHTML=uren+":"+minuten+":"+seconden;
 }
 
-setInterval(toonTijdFlorida, 500);
-
 function toonTijdCalifornie() {
 	var date = new Date();
 	var uren = date.getUTCHours()-7;
@@ -37,8 +59,6 @@ function toonTijdCalifornie() {
 	// in de HTML
 	document.getElementById('tijdcalifornie').innerHTML=uren+":"+minuten+":"+seconden;
 }
-
-setInterval(toonTijdCalifornie, 500);
 
 function infoLandingPad4(){
 	var API='https://api.spacexdata.com/v3/landpads/LZ-4';
@@ -165,9 +185,11 @@ function infoLandingPadOCISLY(){
 		document.getElementById('naamOCISLY').innerHTML = naam;
 		document.getElementById('regioOCISLY').innerHTML = regio;
 		//locatie
-		latitudeOCISLY = data.location.latitude;
-		longitudeOCISLY = data.location.longitude;
+		var latitudeOCISLY = data.location.latitude;
+		var longitudeOCISLY = data.location.longitude;
 		infoWeerOCISLY(latitudeOCISLY, longitudeOCISLY);
+		var locatieOCISLY=[longitudeOCISLY, latitudeOCISLY];
+		laadMapOCISLY(locatieOCISLY);
 	});
 }
 
@@ -221,9 +243,11 @@ function infoLandingPadJRTI(){
 		document.getElementById('naamJRTI').innerHTML = naam;
 		document.getElementById('regioJRTI').innerHTML = regio;
 		//locatie
-		latitudeJRTI = data.location.latitude;
-		longitudeJRTI = data.location.longitude;
+		var latitudeJRTI = data.location.latitude;
+		var longitudeJRTI = data.location.longitude;
 		infoWeerJRTI(latitudeJRTI, longitudeJRTI);
+		var locatieJRTI=[longitudeJRTI, latitudeJRTI];
+		laadMapJRTI(locatieJRTI);
 	});
 }
 
@@ -262,294 +286,6 @@ function infoWeerJRTI(inhoudlatJRTI, inhoudlonJRTI) {
 			document.getElementById('zichtJRTI').classList.remove("check");
 		}
 	});
-}
-
-var kaartOCISLY;
-var kaartJRTI;
-
-function infoKaart() {
-	// set options for map 
-	var kaartStijl=[
-		  {
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#1d2c4d"
-		      }
-		    ]
-		  },
-		  {
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#8ec3b9"
-		      }
-		    ]
-		  },
-		  {
-		    "elementType": "labels.text.stroke",
-		    "stylers": [
-		      {
-		        "color": "#1a3646"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "administrative.country",
-		    "elementType": "geometry.stroke",
-		    "stylers": [
-		      {
-		        "color": "#4b6878"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "administrative.land_parcel",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#64779e"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "administrative.province",
-		    "elementType": "geometry.stroke",
-		    "stylers": [
-		      {
-		        "color": "#4b6878"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "landscape.man_made",
-		    "elementType": "geometry.stroke",
-		    "stylers": [
-		      {
-		        "color": "#334e87"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "landscape.natural",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#023e58"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#283d6a"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#6f9ba5"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi",
-		    "elementType": "labels.text.stroke",
-		    "stylers": [
-		      {
-		        "color": "#1d2c4d"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi.business",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi.park",
-		    "elementType": "geometry.fill",
-		    "stylers": [
-		      {
-		        "color": "#023e58"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi.park",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#3C7680"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#304a7d"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road",
-		    "elementType": "labels.icon",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#98a5be"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road",
-		    "elementType": "labels.text.stroke",
-		    "stylers": [
-		      {
-		        "color": "#1d2c4d"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.highway",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#2c6675"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.highway",
-		    "elementType": "geometry.stroke",
-		    "stylers": [
-		      {
-		        "color": "#255763"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.highway",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#b0d5ce"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.highway",
-		    "elementType": "labels.text.stroke",
-		    "stylers": [
-		      {
-		        "color": "#023e58"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "transit",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "transit",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#98a5be"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "transit",
-		    "elementType": "labels.text.stroke",
-		    "stylers": [
-		      {
-		        "color": "#1d2c4d"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "transit.line",
-		    "elementType": "geometry.fill",
-		    "stylers": [
-		      {
-		        "color": "#283d6a"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "transit.station",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#3a4762"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "water",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#0e1626"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "water",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#4e6d70"
-		      }
-		    ]
-		  }
-		];
-
-	var kaartOptiesOCISLY = {
-		center: {
-			lat: 28.4104, 
-			lng: -80.6188
-		},
-		zoom: 11,
-		styles:kaartStijl
-	};
-
-	kaartOCISLY = new google.maps.Map(document.getElementById('kaartOCISLY'), kaartOptiesOCISLY);
-
-	var kaartOptiesJRTI = {
-		center: {
-			lat: 28.4104, 
-			lng: -80.6188
-		},
-		zoom: 11,
-		styles:kaartStijl
-	};
-
-	// create map and add to page
-	kaartJRTI = new google.maps.Map(document.getElementById('kaartJRTI'), kaartOptiesJRTI);
 }
 
 function toonTabbladen() {
@@ -644,6 +380,8 @@ function toonTabbladen() {
 }
 
 // alle functies activeren
+setInterval(toonTijdFlorida, 500);
+setInterval(toonTijdCalifornie, 500);
 infoLandingPad4();
 infoLandingPad1();
 infoLandingPadOCISLY();
