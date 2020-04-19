@@ -1,3 +1,45 @@
+function toonTijdFlorida() {
+	var date = new Date();
+	var uren = date.getUTCHours()-4;
+	// als het uur uit 1 getal bestaat voeg er dan een '0' aan toe
+	if (uren <=9){
+		uren = '0'+uren;
+	}
+	var minuten = date.getUTCMinutes();
+	if (minuten <=9){
+		minuten = '0'+minuten;
+	}
+	var seconden = date.getUTCSeconds();
+	if (seconden <=9){
+		seconden = '0'+seconden;
+	}
+	// in de HTML
+	document.getElementById('tijdflorida').innerHTML=uren+":"+minuten+":"+seconden;
+}
+
+setInterval(toonTijdFlorida, 500);
+
+function toonTijdCalifornie() {
+	var date = new Date();
+	var uren = date.getUTCHours()-7;
+	// als het uur uit 1 getal bestaat voeg er dan een '0' aan toe
+	if (uren <=9){
+		uren = '0'+uren;
+	}
+	var minuten = date.getUTCMinutes();
+	if (minuten <=9){
+		minuten = '0'+minuten;
+	}
+	var seconden = date.getUTCSeconds();
+	if (seconden <=9){
+		seconden = '0'+seconden;
+	}
+	// in de HTML
+	document.getElementById('tijdcalifornie').innerHTML=uren+":"+minuten+":"+seconden;
+}
+
+setInterval(toonTijdCalifornie, 500);
+
 function infoLandingPad4(){
 	var API='https://api.spacexdata.com/v3/landpads/LZ-4';
 	fetch(API)
