@@ -1,101 +1,48 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiMTgwNjgzOTEiLCJhIjoiY2s5NzdndWZxMDl4YzNmbWdkYmtxY3BndyJ9.dJL2YabEA7cPVAzBlyX2Vw';
-
-function laadMapOCISLY(locOCISLY) {
-	var mapOCISLY = new mapboxgl.Map({
-	  container: 'kaartOCISLY',
-	  style: 'mapbox://styles/18068391/ck97ev0et2h6a1io76tah1fzv',
-	  center: locOCISLY,
-	  zoom: 10,
-	});
-	var marker = new mapboxgl.Marker().setLngLat(locOCISLY).addTo(mapOCISLY);
-	mapOCISLY.addControl(new mapboxgl.NavigationControl()); 
-}
-function laadMapJRTI(locJRTI) {
-	var mapJRTI = new mapboxgl.Map({
-	  container: 'kaartJRTI',
-	  style: 'mapbox://styles/18068391/ck97ev0et2h6a1io76tah1fzv',
-	  center: locJRTI,
-	  zoom: 10,
-	});
-	var marker = new mapboxgl.Marker().setLngLat(locJRTI).addTo(mapJRTI);
-	mapJRTI.addControl(new mapboxgl.NavigationControl());
-}
-
-
-function toonTijdFlorida() {
-	var date = new Date();
-	var uren = date.getUTCHours()-4;
-	// als het uur uit 1 getal bestaat voeg er dan een '0' aan toe
-	if (uren <=9){
-		uren = '0'+uren;
-	}
-	var minuten = date.getUTCMinutes();
-	if (minuten <=9){
-		minuten = '0'+minuten;
-	}
-	var seconden = date.getUTCSeconds();
-	if (seconden <=9){
-		seconden = '0'+seconden;
-	}
-	// in de HTML
-	document.getElementById('tijdflorida').innerHTML=uren+":"+minuten+":"+seconden;
-}
-
-function toonTijdCalifornie() {
-	var date = new Date();
-	var uren = date.getUTCHours()-7;
-	// als het uur uit 1 getal bestaat voeg er dan een '0' aan toe
-	if (uren <=9){
-		uren = '0'+uren;
-	}
-	var minuten = date.getUTCMinutes();
-	if (minuten <=9){
-		minuten = '0'+minuten;
-	}
-	var seconden = date.getUTCSeconds();
-	if (seconden <=9){
-		seconden = '0'+seconden;
-	}
-	// in de HTML
-	document.getElementById('tijdcalifornie').innerHTML=uren+":"+minuten+":"+seconden;
-}
-
+// data uit de SpaxeX API halen meer info = https://docs.spacexdata.com/?version=latest
 function infoLandingPad4(){
+	// API link
 	var API='https://api.spacexdata.com/v3/landpads/LZ-4';
 	fetch(API)
 	.then(function(data) {
+		//json bestand zodat we de data kunnen gebruiken
 		return data.json();
 	})
 	.then(function(data) {
-		//info
-		var naam =data.location.name+" - "+data.full_name;
-		var regio=data.location.region;
+	// data bewerken
+		// info
+		var naam = data.location.name+" - "+data.full_name;
+		var regio = data.location.region;
+		// data tonen
 		document.getElementById('naam4').innerHTML = naam;
 		document.getElementById('regio4').innerHTML = regio;
-		//locatie
+		// locatie
 		var latitude4 = data.location.latitude;
 		var longitude4 = data.location.longitude;
+		// coordinaten doorgeven
 		infoWeer4(latitude4, longitude4);
 	});
 }
 
+// data uit de OpenWeather API meer info = https://openweathermap.org/current
 function infoWeer4(inhoudlat4, inhoudlon4) {
 	var url = 'https://api.openweathermap.org/data/2.5/weather?lat=';
 	var apiKey ='71651970a1f747f6f025a4c39785894b';
+	// API link samenvoegen, coordinaten van SpaceX API gebruiken
 	var API = url + inhoudlat4 +'&lon='+ inhoudlon4 + '&appid=' + apiKey+'&units=metric'+'&lang=nl';
 	fetch(API)
 	.then(function(data) {
 		return data.json();
 	})
 	.then(function(data) {
-		var temperatuur=Math.round(data.main.temp);
+		var temperatuur=Math.round(data.main.temp); //afronden op heel getal
 		var wind=data.wind.speed;
 		var zicht=data.visibility;
 		document.getElementById('temperatuur4').innerHTML = temperatuur+'&#176;C';
 		document.getElementById('wind4').innerHTML = wind+' meter/sec';
-		document.getElementById('zicht4').innerHTML = Math.round(zicht/1000)+' km ver zicht';
+		document.getElementById('zicht4').innerHTML = Math.round(zicht/1000)+' km ver zicht'; // van meter naar kilometer
+		// checken of de weersomstandingheden optimaal zijn voor een raketlanding
 		if(temperatuur>=5 && temperatuur<=25){
-			document.getElementById('temperatuur4').classList.add("check");
+			document.getElementById('temperatuur4').classList.add("check"); // groene achtergrond bij .check (CSS)
 		}
 		else{
 			document.getElementById('temperatuur4').classList.remove("check");
@@ -124,8 +71,8 @@ function infoLandingPad1(){
 	})
 	.then(function(data) {
 		//info
-		var naam =data.location.name+" - "+data.full_name;
-		var regio=data.location.region;
+		var naam = data.location.name+" - "+data.full_name;
+		var regio = data.location.region;
 		document.getElementById('naam1').innerHTML = naam;
 		document.getElementById('regio1').innerHTML = regio;
 		//locatie
@@ -180,15 +127,16 @@ function infoLandingPadOCISLY(){
 	})
 	.then(function(data) {
 		//info
-		var naam =data.full_name;
-		var regio=data.location.region+" - "+data.location.name;
+		var naam = data.full_name;
+		var regio = data.location.region+" - "+data.location.name;
 		document.getElementById('naamOCISLY').innerHTML = naam;
 		document.getElementById('regioOCISLY').innerHTML = regio;
 		//locatie
 		var latitudeOCISLY = data.location.latitude;
 		var longitudeOCISLY = data.location.longitude;
 		infoWeerOCISLY(latitudeOCISLY, longitudeOCISLY);
-		var locatieOCISLY=[longitudeOCISLY, latitudeOCISLY];
+		// coordinaten in array voor kaart
+		var locatieOCISLY = [longitudeOCISLY, latitudeOCISLY];
 		laadMapOCISLY(locatieOCISLY);
 	});
 }
@@ -238,8 +186,8 @@ function infoLandingPadJRTI(){
 	})
 	.then(function(data) {
 		//info
-		var naam =data.full_name;
-		var regio=data.location.region+" - "+data.location.name;
+		var naam = data.full_name;
+		var regio = data.location.region+" - "+data.location.name;
 		document.getElementById('naamJRTI').innerHTML = naam;
 		document.getElementById('regioJRTI').innerHTML = regio;
 		//locatie
@@ -288,18 +236,92 @@ function infoWeerJRTI(inhoudlatJRTI, inhoudlonJRTI) {
 	});
 }
 
+// API key Mapbox API meer info = https://docs.mapbox.com/mapbox-gl-js/api/
+mapboxgl.accessToken = 'pk.eyJ1IjoiMTgwNjgzOTEiLCJhIjoiY2s5NzdndWZxMDl4YzNmbWdkYmtxY3BndyJ9.dJL2YabEA7cPVAzBlyX2Vw';
+
+// kaart voor het landingschip Of Course I Still Love You
+function laadMapOCISLY(locOCISLY) {
+	// maak kaart
+	var mapOCISLY = new mapboxgl.Map({
+		// plek in html
+		container: 'kaartOCISLY',
+		// style (custom thema)
+		style: 'mapbox://styles/18068391/ck97ev0et2h6a1io76tah1fzv',
+		center: locOCISLY, // coordinaten van SpaceX API
+		zoom: 10,
+	});
+	// marker van locatie schip met coordinaten van SpaceX API
+	var marker = new mapboxgl.Marker().setLngLat(locOCISLY).addTo(mapOCISLY);
+	// voeg controls toe
+	mapOCISLY.addControl(new mapboxgl.NavigationControl()); 
+}
+
+// kaart voor het landingschip Just Read The Instructions
+function laadMapJRTI(locJRTI) {
+	var mapJRTI = new mapboxgl.Map({
+	  container: 'kaartJRTI',
+	  style: 'mapbox://styles/18068391/ck97ev0et2h6a1io76tah1fzv',
+	  center: locJRTI,
+	  zoom: 10,
+	});
+	var marker = new mapboxgl.Marker().setLngLat(locJRTI).addTo(mapJRTI);
+	mapJRTI.addControl(new mapboxgl.NavigationControl());
+}
+
+function toonTijdFlorida() {
+	var date = new Date();
+	// Florida tijdzone
+	var uren = date.getUTCHours()-4;
+	// als het uur uit 1 getal bestaat voeg er dan een '0' aan toe
+	if (uren <=9){
+		uren = '0'+uren;
+	}
+	var minuten = date.getUTCMinutes();
+	if (minuten <=9){
+		minuten = '0'+minuten;
+	}
+	var seconden = date.getUTCSeconds();
+	if (seconden <=9){
+		seconden = '0'+seconden;
+	}
+	// in de HTML
+	document.getElementById('tijdflorida').innerHTML=uren+":"+minuten+":"+seconden;
+}
+
+function toonTijdCalifornie() {
+	var date = new Date();
+	// Californie tijdzone
+	var uren = date.getUTCHours()-7;
+	// als het uur uit 1 getal bestaat voeg er dan een '0' aan toe
+	if (uren <=9){
+		uren = '0'+uren;
+	}
+	var minuten = date.getUTCMinutes();
+	if (minuten <=9){
+		minuten = '0'+minuten;
+	}
+	var seconden = date.getUTCSeconds();
+	if (seconden <=9){
+		seconden = '0'+seconden;
+	}
+	// in de HTML
+	document.getElementById('tijdcalifornie').innerHTML=uren+":"+minuten+":"+seconden;
+}
+
 function toonTabbladen() {
 	var base4=document.getElementById('base4');
 	var base1=document.getElementById('base1');
 	var baseOCISLY=document.getElementById('baseOCISLY');
 	var baseJRTI=document.getElementById('baseJRTI');
 
+	// laat bij kleine schermen maar 1 base tegelijkertijd zien
 	if (window.innerWidth<768) {
 		base4.style.display = "block";
 		base1.style.display = "none";
 		baseOCISLY.style.display = "none";
 		baseJRTI.style.display = "none";
 
+		// laat base 4 zien als er op de knop voor base 4 word gedrukt en laat de andere bases dan niet zien
 		document.getElementById('knop4').onclick=
 		function toonBase4(){
 			base4.style.display = "block";
@@ -333,6 +355,7 @@ function toonTabbladen() {
 		}
 	}
 	
+	// laat bij tablet formaat schermen 1 base tegelijkertijd zien met een grid
 	else if (window.innerWidth<1024 && screen.width>=768) {
 		base4.style.display = "grid";
 		base1.style.display = "none";
@@ -371,6 +394,8 @@ function toonTabbladen() {
 			baseJRTI.style.display = "grid";
 		}
 	}
+
+	// laat bij grotere schermen alle bases zien
 	else {
 		base4.style.display = null;
 		base1.style.display = null;
@@ -380,11 +405,11 @@ function toonTabbladen() {
 }
 
 // alle functies activeren
-setInterval(toonTijdFlorida, 500);
-setInterval(toonTijdCalifornie, 500);
 infoLandingPad4();
 infoLandingPad1();
 infoLandingPadOCISLY();
 infoLandingPadJRTI();
+setInterval(toonTijdFlorida, 500); // check de tijd om de 500 miliseconden
+setInterval(toonTijdCalifornie, 500);
 toonTabbladen();
-window.onresize = toonTabbladen;
+window.onresize = toonTabbladen; // voer de functie ook uit als het formaat van de site veranderd

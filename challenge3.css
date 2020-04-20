@@ -37,14 +37,7 @@ h1{
 	text-align: center;
 }
 
-/*knoppen*/
-nav{
-	/*responsive*/
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-}
-
+/*knoppen in de navigatie*/
 button{
 	margin-top:20px;
     border: solid thick white;
@@ -61,6 +54,13 @@ button:hover{
 	background-color: transparent;
 }
 
+/*knoppen in de navigatie responsive*/
+nav{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
 /*elke base is een section*/
 section{
 	margin: 20px;
@@ -73,35 +73,42 @@ img{
 	width: 100%;
 }
 
+/*regels met informatie*/
 strong, span{
 	line-height: 1.8;
 }
 
 p{
+	/*ruimte tussen alinea's*/
 	margin-bottom: 20px;
 }
 
+/*formaat van de kaarten*/
 #kaartOCISLY, #kaartJRTI{
 	width: 100%;
 	height:200px;
 }
 
+/*geef de waardes bij het weer een rode achtergrond*/
 #weer4 span, #weer1 span, #weerOCISLY span, #weerJRTI span{
 	background-color:#ffcccc;
 	padding: 2px 8px;
 }
 
+/*goede waardes krijgen een groene achtergrond (JavaScript)*/
 .check{
+	/*overscrijf rood*/
 	background-color:#E6FFCC !important;
-	padding: 2px 8px;
 }
 
+/*knoppen passen met twee naast elkaar (neemt minder ruimte in)*/
 @media only screen and (min-width: 388px){
 	button{
 		width:48%;
 	}
 }
 
+/*knoppen passen naast elkaar (neemt minder ruimte in)*/
 @media only screen and (min-width: 680px){
 	button{
 		width:auto;
@@ -110,6 +117,7 @@ p{
 
 /*tablet*/
 @media only screen and (min-width: 768px){
+	/*maak van elke base een grid met in een kolom de informatie en daarnaast het weer en de locatie*/
 	#base4{
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -197,43 +205,37 @@ p{
 
 /*Laptop*/
 @media only screen and (min-width: 1024px){
+	/*geen knoppen*/
 	nav{
 		display: none;
 	}
 
+	/*grotere kaarten*/
 	#kaartOCISLY, #kaartJRTI{
-		width: 100%;
 		height: 412px;
 	}
 
+	/*maak van elke base een grid met de informatie, het weer en de locatie naast elkaar*/
 	#base4{
-		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-gap: 20px;
 		grid-template-areas:
 		'info4 weer4 locatie4';
 	}
 
 	#base1{
-		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-gap: 20px;
 		grid-template-areas:
 		'info1 weer1 locatie1';
 	}
 
 	#baseOCISLY{
-		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-gap: 20px;
 		grid-template-areas:
 		'infoOCISLY weerOCISLY locatieOCISLY';
 	}
 
 	#baseJRTI{
-		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-gap: 20px;
 		grid-template-areas:
 		'infoJRTI weerJRTI locatieJRTI';
 	}
@@ -241,6 +243,7 @@ p{
 
 /*Groot scherm*/
 @media only screen and (min-width: 1440px){
+	/*maak een grid waarin de verschillende bases naast elkaar staan*/
 	body{
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -269,10 +272,12 @@ p{
 		grid-area: baseJRTI;
 	}
 
+	/*binnen de bases geen grid meer*/
 	#base4,#base1,#baseOCISLY,#baseJRTI{
 		display: block;
 	}
 
+	/*ruimte tussen de artiekelen*/
 	#weer4 h2, #weer1 h2, #weerOCISLY h2, #weerJRTI h2, #locatie4 h2, #locatie1 h2, #locatieOCISLY h2, #locatieJRTI h2{
 		margin-top: 20px;
 	}
