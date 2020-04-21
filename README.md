@@ -8,7 +8,7 @@ IxD & Technology 2
 
 Op deze website is een overzicht van verschillende landingsplekken te zien voor het Starship van SpaceX. Dit dashboard kan gebruikt worden om de verschillende landingsplekken te vergelijken. Zo kan er een goede keuze worden gemaakt tussen de landingsplekken als het Starship terugkomt van Mars.
 
-Het dashboard is door mij gemaakt met HTML5, CSS en JavaScript. De site is responsive en maakt gebruik van media-queries, CSS grid en flexbox (bij de knoppen op de kleinere schemen). Bij deze challenge moesten we gebruik maken van API's. Ik heb drie API's gebuikt, een API van [SpaceX](https://docs.spacexdata.com/?version=latest), [OpenWeather](https://openweathermap.org/current) en [Mapbox](https://docs.mapbox.com/mapbox-gl-js/api/).
+Het dashboard is door mij gemaakt met HTML5, CSS en JavaScript. De site is responsive en maakt gebruik van media-queries, CSS grid en flexbox (bij de knoppen op de kleinere schemen). Bij deze challenge moesten we gebruik maken van API's. Ik heb drie API's gebuikt, een API van [SpaceX](https://docs.spacexdata.com/?version=latest), [OpenWeather](https://openweathermap.org/current) en [Mapbox](https://docs.mapbox.com/mapbox-gl-js/api/). De API's zijn gecombineerd doordat ze allemaal de locatie van de landignsbases gebruiken.
 
 Eerst zal ik wat vertellen over hoe ik op het idee voor de website gekomen ben, vervolgens over de landingplekken die ik heb gekozen en de informatie die ik daarbij toon en tot slot over de responsiveness van de website.
 
