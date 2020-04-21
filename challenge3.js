@@ -321,7 +321,7 @@ function toonTabbladen() {
 		baseOCISLY.style.display = "none";
 		baseJRTI.style.display = "none";
 
-		// laat base 4 zien als er op de knop voor base 4 word gedrukt en laat de andere bases dan niet zien
+		// laat base 4 zien als er op de knop voor base 4 wordt gedrukt en laat de andere bases dan niet zien
 		document.getElementById('knop4').onclick=
 		function toonBase4(){
 			base4.style.display = "block";
@@ -412,4 +412,4 @@ infoLandingPadJRTI();
 setInterval(toonTijdFlorida, 500); // check de tijd om de 500 miliseconden
 setInterval(toonTijdCalifornie, 500);
 toonTabbladen();
-window.onresize = toonTabbladen; // voer de functie ook uit als het formaat van de site veranderd
+window.onresize = toonTabbladen; // voer de functie ook uit als het formaat van de site verandert

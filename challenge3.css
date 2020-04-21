@@ -14,7 +14,7 @@
 body{
 	/*lettertype*/
 	font-family: 'Saira Semi Condensed',sans-serif;
-	/*Achtergrond*/
+	/*achtergrond*/
 	background-image: url("ag.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
@@ -277,7 +277,7 @@ p{
 		display: block;
 	}
 
-	/*ruimte tussen de artiekelen*/
+	/*ruimte tussen de artikelen*/
 	#weer4 h2, #weer1 h2, #weerOCISLY h2, #weerJRTI h2, #locatie4 h2, #locatie1 h2, #locatieOCISLY h2, #locatieJRTI h2{
 		margin-top: 20px;
 	}
